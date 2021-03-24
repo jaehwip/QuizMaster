@@ -5,9 +5,11 @@ import java.util.Scanner;
 public class Menu {
 	
 	private Scanner keyboardIn;
+	private QuizManager quizManager;
 	
 	public Menu() {
 		keyboardIn = new Scanner(System.in);
+		this.quizManager = new QuizManager(); 
 	}
 
 	public static void main(String[] args) {
@@ -56,7 +58,7 @@ public class Menu {
 
 	private void processTeacher(int teacherOption) {
 		if(teacherOption == 1) {
-			System.out.println("Creating a quiz");
+			addNewQuiz();
 		}
 		else if(teacherOption == 2) {
 			System.out.println("Viewing grades");
@@ -64,6 +66,13 @@ public class Menu {
 		else if(teacherOption == 3) {
 			System.out.println("Editing");
 		}
+	}
+
+	private void addNewQuiz() {
+		System.out.println("Please enter a name for the quiz");
+		String quizName = keyboardIn.nextLine();
+		Quiz quizToBeAdded = new Quiz(quizName);
+		quizManager.addQuiz(quizToBeAdded);
 	}
 
 	private void displayStudentMenu() {
